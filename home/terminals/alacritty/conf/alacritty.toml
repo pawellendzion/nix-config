@@ -1,0 +1,10 @@
+import = [
+"~/.config/alacritty/tokyonight_night.toml",
+]
+
+[window]
+opacity = 0.95
+
+[font]
+normal = { family = "FantasqueSansM Nerd Font", style = "Regular" }
+

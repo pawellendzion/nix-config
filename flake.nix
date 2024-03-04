@@ -20,10 +20,14 @@
         inherit system;
 
         modules = [
-          ./modules/base
           ./hosts/nixos-vbox
+          ./modules/base
+          ./modules/desktop.nix
 
           {
+            modules.desktop.xorg.enable = true;
+            services.xserver.desktopManager.plasma5.enable = true;
+
             _module.args = { 
               inherit constants;
               inherit (inputs) nixpkgs;

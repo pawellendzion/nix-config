@@ -46,4 +46,5 @@ require('lazy').setup({
 	{ import = 'plugins' },
 })
 
+vim.g.tokyonight_colors = { border = '#27a1b9' }
 vim.cmd.colorscheme 'tokyonight'

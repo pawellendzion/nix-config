@@ -1,4 +1,4 @@
-{
+{ ... }: {
   nixpkgs.config.allowUnfree = true;
 
   boot.loader.systemd-boot = {
@@ -6,4 +6,13 @@
   };
 
   environment.variables.EDITOR = "nvim";
+
+  virtualisation.docker = {
+    enable = true;
+
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
 }

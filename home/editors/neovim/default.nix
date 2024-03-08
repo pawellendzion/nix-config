@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     xclip
     gnumake
+    ripgrep
 
     # LSP
     lua-language-server # lua

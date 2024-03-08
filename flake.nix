@@ -26,7 +26,6 @@
 
           {
             modules.desktop.xorg.enable = true;
-            services.xserver.desktopManager.plasma5.enable = true;
 
             _module.args = { 
               inherit constants;

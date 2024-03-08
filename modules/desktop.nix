@@ -1,4 +1,4 @@
-{ config, lib, ... }: with lib; let
+{ config, lib, pkgs, ... }: with lib; let
   cfgXorg = config.modules.desktop.xorg;
 in {
   options.modules.desktop = {
@@ -11,12 +11,32 @@ in {
         enable = true;
 
         displayManager = {
-          sddm.enable = true;
-          # defaultSession = "hm-session";
+          lightdm.enable =  true;
+          defaultSession = "hm-session";
+          # session = [
+          #   {
+          #     name = "hm-session";
+          #     manage = "window";
+          #     start = ''
+          #       ${pkgs.runtimeShell} $HOME/.xsession &
+          #       waitPID=$!
+          #     '';
+          #   }
+          # ];
         };
 
         desktopManager = {
           runXdgAutostartIfNone = true;
+          session = [
+            {
+              name = "hm-session";
+              manage = "window";
+              start = ''
+                ${pkgs.runtimeShell} $HOME/.xsession &
+                waitPID=$!
+              '';
+            }
+          ];
         };
 
         xkb = {

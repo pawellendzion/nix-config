@@ -12,8 +12,6 @@
   home.username = constants.user.name;
   home.homeDirectory = "/home/${constants.user.name}";
 
-  modules.desktop.i3.enable = true;
-
   home.packages = [
     pkgs.feh
     # # It is sometimes useful to fine-tune packages, for example, by applying

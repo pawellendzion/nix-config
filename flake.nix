@@ -10,47 +10,50 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }: let
-    system = "x86_64-linux";
-    constants = import ./constants.nix;
-  in {
-    nixosConfigurations = {
-      nixos-vbox = nixpkgs.lib.nixosSystem {
-        inherit system;
 
-        modules = [
-          ./hosts/nixos-vbox
-          ./modules/base
-          ./modules/desktop.nix
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+    let
+      system = "x86_64-linux";
+      constants = import ./constants.nix;
+    in
+    {
+      nixosConfigurations = {
+        nixos-vbox = nixpkgs.lib.nixosSystem {
+          inherit system;
 
-          {
-            modules.desktop.xorg.enable = true;
+          specialArgs = inputs // {
+            inherit constants;
+          };
 
-            _module.args = { 
-              inherit constants;
-              inherit (inputs) nixpkgs;
-            };
-          }
+          modules = [
+            ./hosts/nixos-vbox
+            ./modules/base
+            ./modules/desktop.nix
 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {   
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = {
-                inherit inputs;
-                inherit constants;
-                pkgs-stable = import inputs.nixpkgs-stable {
-                  inherit system; 
-                  config.allowUnfree = true;
+            { modules.desktop.xorg.enable = true; }
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = inputs // {
+                  inherit constants;
+                  pkgs-stable = import inputs.nixpkgs-stable {
+                    inherit system;
+                    config.allowUnfree = true;
+                  };
+                };
+                users.${constants.user.name} = {
+                  imports = [
+                    ./home
+                    { modules.desktop.i3.enable = true; }
+                  ];
                 };
               };
-              users.${constants.user.name} = import ./home;
-            };
-          }
-        ];
+            }
+          ];
+        };
       };
     };
-  };
 }

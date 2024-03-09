@@ -7,7 +7,7 @@
     description = constants.user.fullName;
     extraGroups = [
       constants.user.name
-      "networkmanager" 
+      "networkmanager"
       "wheel"
       "docker"
     ];

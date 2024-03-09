@@ -1,6 +1,9 @@
-{ config, lib, ... }@args: with lib; let 
+{ config, lib, ... }@args:
+with lib;
+let
   cfg = config.modules.desktop.i3;
-in {
+in
+{
   options.modules.desktop.i3 = {
     enable = mkEnableOption "i3 window manager";
   };

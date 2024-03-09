@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }: with lib; let
   cfgXorg = config.modules.desktop.xorg;
-in {
+in
+{
   options.modules.desktop = {
     xorg.enable = mkEnableOption "Xorg display server";
   };
@@ -11,7 +12,7 @@ in {
         enable = true;
 
         displayManager = {
-          lightdm.enable =  true;
+          lightdm.enable = true;
           defaultSession = "hm-session";
           # session = [
           #   {

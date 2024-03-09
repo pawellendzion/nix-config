@@ -1,6 +1,4 @@
 { ... }: {
-  nixpkgs.config.allowUnfree = true;
-
   boot.loader.systemd-boot = {
     configurationLimit = 10;
   };

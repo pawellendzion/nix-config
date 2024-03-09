@@ -4,24 +4,27 @@
     gnumake
     ripgrep
 
-    # LSP
+    # Formatters
+    nixpkgs-fmt
+
+    # LSPs
     lua-language-server # lua
     nil # Nix
     vscode-langservers-extracted # JSON / HTML / CSS / ESLint
 
-    # DAP
+    # DAPs
   ];
 
   programs = {
     neovim = {
       enable = true;
-      
+
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
     };
   };
-  
+
   home.file = {
     ".config/nvim" = {
       source = ./conf;

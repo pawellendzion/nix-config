@@ -1,4 +1,4 @@
-{ config, lib, ... }@args:
+{ config, lib, pkgs, ... }@args:
 with lib;
 let
   cfg = config.modules.desktop.i3;

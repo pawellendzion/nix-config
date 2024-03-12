@@ -1,12 +1,16 @@
-{ ... }: {
+{ lib, pkgs, ... }: {
   xsession = {
     enable = true;
     windowManager.i3 = {
       enable = true;
-      config = {
-        modifier = "Mod1";
-      };
-      # extraConfig = builtins.readFile ../conf/i3-config;
+      config = lib.mkForce null;
+      extraConfig = builtins.readFile ./conf/i3-config;
     };
   };
+
+  home.packages = with pkgs; [
+    dmenu
+    i3status
+    i3lock
+  ];
 }

@@ -5,7 +5,7 @@
     ./editors
     ./terminals
     ./desktop
-    ./brwosers.nix
+    ./browsers.nix
     ./git.nix
   ];
 

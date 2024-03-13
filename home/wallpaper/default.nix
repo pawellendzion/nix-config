@@ -1,11 +1,14 @@
 { pkgs, ... }: {
   systemd.user.services.wallpaper = {
-    wantedBy = [ "graphical-session.target" ];
-    unitConfig = {
-      Description = "Wallpaper loader";
+    Unit = {
+      Description = "Wallpaper setter";
       After = [ "graphical-session-pre.target" ];
       Wants = [ "graphical-session-pre.target" ];
     };
-    script = "${pkgs.feh}";
+    Install.WantedBy = [ "graphical-session.target" ];
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.feh}/bin/feh ${./wallpaper.png} --bg-fill";
+    };
   };
 }

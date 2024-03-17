@@ -14,6 +14,7 @@ return {
 					ensure_installed = {
 						'go', 'lua', 'rust', 'tsx', 'javascript',
 						'typescript', 'vimdoc', 'vim', 'bash', 'php',
+						'templ'
 					},
 
 					ignore_install = {},

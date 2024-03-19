@@ -6,6 +6,7 @@
     ./terminals
     ./desktop
     ./wallpaper
+    ./shells
     ./browsers.nix
     ./git.nix
   ];

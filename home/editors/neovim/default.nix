@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, neovim-config, ... }: {
   home.packages = with pkgs; [
     xclip
     gnumake
@@ -27,7 +27,7 @@
 
   home.file = {
     ".config/nvim" = {
-      source = ./conf;
+      source = neovim-config;
       recursive = true;
     };
   };

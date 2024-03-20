@@ -1,3 +1,0 @@
-[submodule "home/editors/neovim/conf"]
-	path = home/editors/neovim/conf
-	url = git@github.com:pawellendzion/neovim-config.git

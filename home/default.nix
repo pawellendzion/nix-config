@@ -9,6 +9,7 @@
     ./shells
     ./browsers.nix
     ./git.nix
+    ./starship.nix
   ];
 
   home.username = constants.user.name;

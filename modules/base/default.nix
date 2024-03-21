@@ -6,5 +6,6 @@
     ./packages.nix
     ./user-groups.nix
     ./ssh.nix
+    ./shell.nix
   ];
 }

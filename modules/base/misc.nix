@@ -4,6 +4,7 @@
   };
 
   environment.variables.EDITOR = "nvim";
+  environment.etc.hosts.mode = "0644";
 
   virtualisation.docker = {
     enable = true;

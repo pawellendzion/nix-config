@@ -13,10 +13,14 @@
   programs.zsh = {
     enable = true;
 
+    initExtra = ''
+      eval "$(direnv hook zsh)"
+    '';
+
     localVariables = {
       ZSH_AUTOSUGGEST_STRATEGY = [
-        "completion"
         "match_prev_cmd"
+        "completion"
       ];
     };
 

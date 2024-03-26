@@ -1,8 +1,8 @@
-{ constants, ... }: {
+{ userFullName, userEmail, ... }: {
   programs.git = {
     enable = true;
 
-    userName = constants.user.fullName;
-    userEmail = constants.user.email;
+    userName = userFullName;
+    inherit userEmail;
   };
 }

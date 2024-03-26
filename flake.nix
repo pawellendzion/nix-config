@@ -19,7 +19,10 @@
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
-      constants = import ./constants.nix;
+
+      userName = "pawellendzion";
+      userEmail = "pawellendzion01@gmail.com";
+      userFullName = "Paweł Lendzion";
     in
     {
       nixosConfigurations = {
@@ -27,7 +30,7 @@
           inherit system;
 
           specialArgs = inputs // {
-            inherit constants;
+            inherit userName userEmail userFullName;
           };
 
           modules = [
@@ -43,13 +46,13 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = inputs // {
-                  inherit constants;
+                  inherit userName userEmail userFullName;
                   pkgs-stable = import inputs.nixpkgs-stable {
                     inherit system;
                     config.allowUnfree = true;
                   };
                 };
-                users.${constants.user.name} = {
+                users.${userName} = {
                   imports = [
                     ./home
                     { modules.desktop.i3.enable = true; }

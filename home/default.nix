@@ -1,4 +1,4 @@
-{ constants, pkgs, ... }:
+{ userName, pkgs, ... }:
 
 {
   imports = [
@@ -12,8 +12,8 @@
     ./starship.nix
   ];
 
-  home.username = constants.user.name;
-  home.homeDirectory = "/home/${constants.user.name}";
+  home.username = userName;
+  home.homeDirectory = "/home/${userName}";
 
   home.packages = [
     pkgs.hostctl

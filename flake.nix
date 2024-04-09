@@ -10,6 +10,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    catppuccin-starship = {
+      url = "github:catppuccin/starship";
+      flake = false;
+    };
+
+    catppuccin-alacritty = {
+      url = "github:catppuccin/alacritty";
+      flake = false;
+    };
+
     neovim-config = {
       url = "github:pawellendzion/neovim-config";
       flake = false;

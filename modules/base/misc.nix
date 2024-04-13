@@ -14,4 +14,7 @@
       setSocketVariable = true;
     };
   };
+
+  # Configure console keymap
+  console.keyMap = "pl2";
 }

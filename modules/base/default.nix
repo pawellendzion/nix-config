@@ -7,5 +7,6 @@
     ./user-groups.nix
     ./ssh.nix
     ./shell.nix
+    ./peripherals.nix
   ];
 }

@@ -65,7 +65,12 @@
                 users.${userName} = {
                   imports = [
                     ./home
-                    { modules.desktop.i3.enable = true; }
+                    {
+                      modules.desktop.i3 = {
+                        enable = true;
+                        modifier = "Mod1";
+                      };
+                    }
                   ];
                 };
               };

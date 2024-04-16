@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }@args:
 with lib;
 let
-  cfg = config.modules.desktop.i3;
+  i3Cfg = config.modules.desktop.i3;
 in
 {
   options.modules.desktop.i3 = {
@@ -11,5 +11,8 @@ in
     };
   };
 
-  config = mkIf cfg.enable (import ./i3 (args // { modifier = cfg.modifier; }));
+  config = mkIf i3Cfg.enable (mkMerge [
+    (import ./i3 (args // { modifier = i3Cfg.modifier; }))
+    (import ./picom args)
+  ]);
 }

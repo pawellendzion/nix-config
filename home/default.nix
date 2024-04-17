@@ -10,6 +10,7 @@
     ./browsers.nix
     ./git.nix
     ./starship.nix
+    ./tmux.nix
   ];
 
   home.username = userName;

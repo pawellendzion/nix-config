@@ -20,6 +20,11 @@
       flake = false;
     };
 
+    catppuccin-tmux = {
+      url = "github:catppuccin/tmux";
+      flake = false;
+    };
+
     neovim-config = {
       url = "github:pawellendzion/neovim-config";
       flake = false;

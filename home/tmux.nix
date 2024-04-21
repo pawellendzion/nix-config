@@ -1,4 +1,4 @@
-{ catppuccin-tmux, ... }: {
+{ pkgs, catppuccin-tmux, ... }: {
   programs.tmux = {
     enable = true;
 
@@ -8,6 +8,8 @@
     keyMode = "vi";
     prefix = "C-a";
     terminal = "screen-256color";
+
+    plugins = with pkgs; [ tmuxPlugins.vim-tmux-navigator ];
 
     extraConfig = ''
       # ================================

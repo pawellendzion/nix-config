@@ -17,6 +17,11 @@
     zsh = {
       enable = true;
 
+      initExtra = ''
+        bindkey '^E' autosuggest-accept
+        bindkey '^ ' forward-word
+      '';
+
       localVariables = {
         ZSH_AUTOSUGGEST_STRATEGY = [
           "match_prev_cmd"

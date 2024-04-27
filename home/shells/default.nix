@@ -1,4 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  scripts = import ./scripts/default.nix { inherit pkgs; };
+in
+{
   home.packages = with pkgs; [
     direnv
   ];
@@ -16,6 +20,11 @@
 
     zsh = {
       enable = true;
+
+      shellAliases = {
+        fc = ". ${scripts.fzf-cd}/bin/fzf-cd .";
+        fh = ". ${scripts.fzf-cd}/bin/fzf-cd ~";
+      };
 
       initExtra = ''
         bindkey '^E' autosuggest-accept

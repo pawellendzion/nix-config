@@ -8,12 +8,13 @@ in
 
   config = mkIf cfgXorg.enable {
     services = {
+      displayManager.defaultSession = "hm-session";
+
       xserver = {
         enable = true;
 
         displayManager = {
           lightdm.enable = true;
-          defaultSession = "hm-session";
           # session = [
           #   {
           #     name = "hm-session";

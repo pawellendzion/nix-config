@@ -2,9 +2,9 @@
   description = "NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -47,6 +47,16 @@
 
           specialArgs = inputs // {
             inherit userName userEmail userFullName;
+
+            pkgs-unstable = import inputs.nixpkgs-unstable {
+              inherit system;
+              config.allowUnfree = true;
+            };
+
+            pkgs-stable = import nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+            };
           };
 
           modules = [
@@ -63,6 +73,12 @@
                 useUserPackages = true;
                 extraSpecialArgs = inputs // {
                   inherit userName userEmail userFullName;
+
+                  pkgs = import inputs.nixpkgs-unstable {
+                    inherit system;
+                    config.allowUnfree = true;
+                  };
+
                   pkgs-stable = import inputs.nixpkgs-stable {
                     inherit system;
                     config.allowUnfree = true;

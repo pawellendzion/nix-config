@@ -1,16 +1,7 @@
-{ userName, pkgs, ... }:
+{ userName, pkgs, mylib, ... }:
 
 {
-  imports = [
-    ./editors
-    ./terminals
-    ./desktop
-    ./shells
-    ./browsers.nix
-    ./git.nix
-    ./starship.nix
-    ./tmux.nix
-  ];
+  imports = mylib.getPaths ./.;
 
   home.username = userName;
   home.homeDirectory = "/home/${userName}";

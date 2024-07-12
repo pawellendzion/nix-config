@@ -39,6 +39,8 @@
       userName = "pawellendzion";
       userEmail = "pawellendzion01@gmail.com";
       userFullName = "Paweł Lendzion";
+
+      mylib = import ./mylib { inherit (nixpkgs) lib; };
     in
     {
       nixosConfigurations = {
@@ -46,7 +48,7 @@
           inherit system;
 
           specialArgs = inputs // {
-            inherit userName userEmail userFullName;
+            inherit userName userEmail userFullName mylib;
 
             pkgs-unstable = import inputs.nixpkgs-unstable {
               inherit system;
@@ -72,7 +74,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = inputs // {
-                  inherit userName userEmail userFullName;
+                  inherit userName userEmail userFullName mylib;
 
                   pkgs = import inputs.nixpkgs-unstable {
                     inherit system;
@@ -105,7 +107,7 @@
           inherit system;
 
           specialArgs = inputs // {
-            inherit userName userEmail userFullName;
+            inherit userName userEmail userFullName mylib;
 
             pkgs-unstable = import inputs.nixpkgs-unstable {
               inherit system;
@@ -131,7 +133,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = inputs // {
-                  inherit userName userEmail userFullName;
+                  inherit userName userEmail userFullName mylib;
 
                   pkgs = import inputs.nixpkgs-unstable {
                     inherit system;

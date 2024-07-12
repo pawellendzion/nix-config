@@ -1,5 +1,3 @@
-{
-  imports = [
-    ./neovim.nix
-  ];
+{ mylib, ... }: {
+  imports = mylib.getPaths ./.;
 }

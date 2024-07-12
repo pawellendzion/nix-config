@@ -23,7 +23,13 @@
     fzf
     jq
 
-    mailspring
+    (mailspring.overrideAttrs (oldAttrs: {
+      postFixup = builtins.replaceStrings
+        [ "$out/bin/mailspring" ]
+        [ ''"$out/bin/mailspring --password-store='gnome-libsecret'"'' ]
+        oldAttrs.postFixup;
+    }))
+
     dbeaver-bin
     google-chrome
 

@@ -9,7 +9,6 @@
       userName
       "networkmanager"
       "wheel"
-      "docker"
     ];
   };
 

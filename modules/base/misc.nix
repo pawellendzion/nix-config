@@ -6,15 +6,6 @@
   environment.variables.EDITOR = "nvim";
   environment.etc.hosts.mode = "0644";
 
-  virtualisation.docker = {
-    enable = true;
-
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
-  };
-
   # Configure console keymap
   console.keyMap = "pl2";
 

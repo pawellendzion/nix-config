@@ -8,5 +8,6 @@
     ./ssh.nix
     ./shell.nix
     ./peripherals.nix
+    ./virtualisation.nix
   ];
 }

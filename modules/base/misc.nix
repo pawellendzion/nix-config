@@ -17,4 +17,6 @@
 
   # Configure console keymap
   console.keyMap = "pl2";
+
+  services.gnome.gnome-keyring.enable = true;
 }

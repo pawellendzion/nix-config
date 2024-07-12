@@ -15,6 +15,9 @@ in
       modifier = mkOption {
         default = "Mod4";
       };
+      extraConfig = mkOption {
+        default = "";
+      };
     };
   };
 
@@ -26,6 +29,6 @@ in
         ${pkgs.feh}/bin/feh ${wallpaper} --bg-fill
       '';
     }
-    (import ./i3 (args // { modifier = i3Cfg.modifier; }))
+    (import ./i3 (args // { inherit (i3Cfg) modifier extraConfig; }))
   ]);
 }

@@ -1,4 +1,9 @@
-{ lib, pkgs, modifier, ... }: {
+{ lib
+, pkgs
+, modifier
+, extraConfig
+, ...
+}: {
   home.packages = with pkgs; [
     dmenu
     i3status
@@ -13,6 +18,7 @@
       extraConfig = ''
         set $mod ${modifier}
         ${builtins.readFile ./conf/i3-config}
+        ${extraConfig}
       '';
     };
   };

@@ -1,12 +1,12 @@
-{ userName, userFullName, ... }: {
+{ username, userFullName, ... }: {
   # Don't allow mutation of users outside the config.
   # users.mutableUsers = false;
 
-  users.users.${userName} = {
+  users.users.${username} = {
     isNormalUser = true;
     description = userFullName;
     extraGroups = [
-      userName
+      username
       "networkmanager"
       "wheel"
     ];

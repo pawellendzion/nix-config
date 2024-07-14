@@ -1,10 +1,10 @@
-{ userName, pkgs, mylib, ... }:
+{ username, pkgs, mylib, ... }:
 
 {
   imports = mylib.getPaths ./.;
 
-  home.username = userName;
-  home.homeDirectory = "/home/${userName}";
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
 
   home.packages = with pkgs; [
     hostctl

@@ -1,4 +1,6 @@
 { lib, ... }: {
+  nixosSystemWith = import ./nixosSystemWith.nix;
+
   getPaths = path:
     builtins.map
       (name: path + "/${name}")

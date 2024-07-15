@@ -11,6 +11,8 @@
     lua-language-server # lua
     nil # Nix
     vscode-langservers-extracted # JSON / HTML / CSS / ESLint
+    nodePackages.typescript-language-server
+    nodePackages.intelephense
 
     # DAPs
   ];

@@ -71,11 +71,11 @@
     "neovim-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1713723519,
-        "narHash": "sha256-7mTOsoMjZu/N7ueNN1ZsKAh/+t+vJ4oE3ekZPRsj1eo=",
+        "lastModified": 1721077297,
+        "narHash": "sha256-c7gwNJXotA4WTwXEdBIfLnRuHCY0Fdh2b/9VWpVrHAE=",
         "owner": "pawellendzion",
         "repo": "neovim-config",
-        "rev": "1eb14dad1d9f27f484398f2493e94a0ee6896076",
+        "rev": "7e4c713d7e0f930555bc8bca7e71c4f5b50e730b",
         "type": "github"
       },
       "original": {

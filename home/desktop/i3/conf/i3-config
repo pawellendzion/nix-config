@@ -148,6 +148,7 @@ gaps outer 0
 # finds out, if available)
 bar {
         status_command i3status
+        font pango:FantasqueSansM Nerd Font Regular 9
 }
 
 # ================================

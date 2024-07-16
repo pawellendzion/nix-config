@@ -57,10 +57,10 @@ in
                     enable = true;
                     modifier = "Mod4";
                     extraConfig = ''
-                      workspace $ws1 output DVI-D-1
-                      workspace $ws2 output HDMI-1
-                      workspace $ws3 output VGA-1
-                      workspace $ws4 output VGA-1
+                      workspace $ws1 output DVI-D-0
+                      workspace $ws2 output HDMI-0
+                      workspace $ws3 output VGA-0
+                      workspace $ws4 output VGA-0
 
                       exec --no-startup-id i3-msg "workspace $ws1; exec alacritty"
                       exec --no-startup-id i3-msg "workspace $ws2; exec google-chrome-stable"

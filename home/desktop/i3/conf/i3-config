@@ -105,12 +105,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 bindsym $mod+Return exec alacritty
 
-# A more modern dmenu replacement is rofi:
-# bindsym Mod1+d exec "rofi -modi drun,run -show drun"
-# There also is i3-dmenu-desktop which only displays applications shipping a
-# .desktop file. It is a wrapper around dmenu, so you need that installed.
-# bindsym Mod1+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec "rofi -modi drun,run -show drun"
 
 bindsym $mod+Shift+q kill
 
@@ -180,3 +175,4 @@ exec --no-startup-id nm-applet
 # ================================
 
 font pango:FantasqueSansM Nerd Font Regular 8
+mouse_warping none

@@ -3,6 +3,7 @@
     xclip
     gnumake
     ripgrep
+    nodejs_18
 
     # Formatters
     nixpkgs-fmt

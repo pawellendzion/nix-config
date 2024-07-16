@@ -2,13 +2,19 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ ... }:
+{ config, ... }:
 
 {
   imports =
     [
       ./hardware-configuration.nix
     ];
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.opengl.enable = true;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+  hardware.nvidia.nvidiaSettings = true;
+  hardware.nvidia.modesetting.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

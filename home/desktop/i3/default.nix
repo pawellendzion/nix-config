@@ -5,9 +5,10 @@
 , ...
 }: {
   home.packages = with pkgs; [
-    dmenu
+    rofi
     i3status
     i3lock
+    xss-lock
   ];
 
   xsession = {

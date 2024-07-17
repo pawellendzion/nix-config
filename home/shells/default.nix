@@ -29,6 +29,7 @@ in
       initExtra = ''
         bindkey '^E' autosuggest-accept
         bindkey '^ ' forward-word
+        source <(${pkgs.fzf}/bin/fzf --zsh)
       '';
 
       localVariables = {

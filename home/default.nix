@@ -14,6 +14,8 @@
     fzf
     jq
 
+    spotify
+
     (mailspring.overrideAttrs (oldAttrs: {
       postFixup = builtins.replaceStrings
         [ "$out/bin/mailspring" ]

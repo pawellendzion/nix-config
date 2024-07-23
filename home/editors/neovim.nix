@@ -7,6 +7,7 @@
 
     # Formatters
     nixpkgs-fmt
+    prettierd
 
     # LSPs
     lua-language-server # lua

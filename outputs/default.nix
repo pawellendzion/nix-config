@@ -53,6 +53,7 @@ in
                 ../home
                 ../hosts/plendzion/home.nix
                 {
+                  alacritty.font-size = 10.25;
                   modules.desktop.i3 = {
                     enable = true;
                     modifier = "Mod4";

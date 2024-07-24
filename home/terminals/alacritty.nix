@@ -1,5 +1,19 @@
-{ catppuccin-alacritty, ... }: {
-  programs = {
+{ catppuccin-alacritty
+, config
+, lib
+, ...
+}:
+let
+  cfg = config.alacritty;
+in
+{
+  options.alacritty = {
+    font-size = lib.mkOption {
+      default = null;
+    };
+  };
+
+  config.programs = {
     alacritty = {
       enable = true;
 
@@ -11,8 +25,7 @@
             family = "FantasqueSansM Nerd Font";
             style = "Regular";
           };
-          size = 10.25;
-        };
+        } // (lib.mkIf (cfg.font-size != null) { size = cfg.font-size; });
       } // builtins.fromTOML (builtins.readFile "${catppuccin-alacritty}/catppuccin-mocha.toml");
     };
   };

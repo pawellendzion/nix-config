@@ -12,7 +12,8 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.dpi = 96;
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
   hardware.nvidia.nvidiaSettings = true;
   hardware.nvidia.modesetting.enable = true;

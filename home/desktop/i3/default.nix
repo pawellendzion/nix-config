@@ -25,7 +25,7 @@ in
     rofi
     i3status
     xss-lock
-    (polybar.override { i3Support = true; })
+    (polybar.override { i3Support = true; pulseSupport = true; })
   ];
 
   xsession = {

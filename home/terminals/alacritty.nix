@@ -18,8 +18,6 @@ in
       enable = true;
 
       settings = {
-        window.opacity = 0.97;
-
         font = {
           normal = {
             family = "FantasqueSansM Nerd Font";

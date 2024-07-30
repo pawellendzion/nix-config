@@ -1,7 +1,4 @@
 { pkgs, ... }: {
-  boot.loader.systemd-boot = {
-    configurationLimit = 10;
-  };
   boot.kernelPackages = pkgs.linuxPackages_6_9;
 
   environment.variables.EDITOR = "nvim";

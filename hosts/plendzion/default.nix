@@ -1,71 +1,100 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+{ ... }:
+let
+  hostName = "plendzion";
 
-{ config, ... }:
+  system-config = { config, ... }: {
+    # Bootloader.
+    boot.loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 10;
+      };
+    };
 
-{
-  imports =
-    [
+    networking = {
+      inherit hostName;
+
+      # Open ports in the firewall.
+      # networking.firewall.allowedTCPPorts = [ ... ];
+      # networking.firewall.allowedUDPPorts = [ ... ];
+      # Or disable the firewall altogether.
+      firewall.enable = false;
+
+      # Enable networking
+      networkmanager.enable = true;
+
+      # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+      # Configure network proxy if necessary
+      # proxy.default = "http://user:password@proxy:port/";
+      # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+    };
+
+    services = {
+      xserver.dpi = 96;
+      xserver.videoDrivers = [ "nvidia" ];
+
+      # Enable touchpad support (enabled default in most desktopManager).
+      # xserver.libinput.enable = true;
+    };
+
+    hardware = {
+      graphics.enable = true;
+      graphics.enable32Bit = true;
+
+      nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+      nvidia.nvidiaSettings = true;
+      nvidia.modesetting.enable = true;
+    };
+
+    system.stateVersion = "24.05";
+  };
+
+  base-modules = {
+    nixos = [
       ./hardware-configuration.nix
+      ../../modules/base
+      ../../modules/desktop.nix
+      system-config
     ];
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-  services.xserver.dpi = 96;
-  hardware.graphics.enable = true;
-  hardware.graphics.enable32Bit = true;
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
-  hardware.nvidia.nvidiaSettings = true;
-  hardware.nvidia.modesetting.enable = true;
+    home = [
+      ../../home
+      ./home.nix
+    ];
+  };
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  i3-module = {
+    nixos = [
+      { modules.desktop.xorg.enable = true; }
+    ] ++ base-modules.nixos;
 
-  # boot.loader.grub.enable = true;
-  # boot.loader.grub.device = "/dev/sda";
-  # boot.loader.grub.useOSProber = true;
+    home = [
+      {
+        alacritty.font-size = 9.25;
+        modules.desktop.i3 = {
+          enable = true;
+          modifier = "Mod4";
+          extraConfig = ''
+            workspace $ws1 output DVI-D-0
+            workspace $ws2 output HDMI-0
+            workspace $ws3 output VGA-0
+            workspace $ws4 output VGA-0
 
-  networking.hostName = "plendzion";
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+            exec --no-startup-id i3-msg "workspace $ws1; exec alacritty"
+            exec --no-startup-id i3-msg "workspace $ws2; exec google-chrome-stable"
+            exec --no-startup-id i3-msg "workspace $ws3; exec dbeaver"
+            exec --no-startup-id i3-msg "workspace $ws4; exec mailspring --password-store='gnome-libsecret'"
 
-  networking.firewall.enable = false;
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
-
-}
+            assign [class="Alacritty"] $ws1
+            assign [class="Google-chrome"] $ws2
+            assign [class="DBeaver"] $ws3
+            assign [class="Mailspring"] $ws4
+          '';
+        };
+      }
+    ] ++ base-modules.home;
+  };
+in
+i3-module

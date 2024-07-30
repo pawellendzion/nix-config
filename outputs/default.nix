@@ -1,8 +1,4 @@
-{ self
-, nixpkgs
-, home-manager
-, ...
-}@inputs:
+{ nixpkgs, ... }@inputs:
 let
   system = "x86_64-linux";
 
@@ -31,55 +27,6 @@ in
 {
   nixosConfigurations = {
     nixos-vbox = nixosSystem (import ../hosts/nixos-vbox inputs);
-
-    plendzion = nixpkgs.lib.nixosSystem {
-      inherit system specialArgs;
-
-      modules = [
-        ../hosts/plendzion
-        ../modules/base
-        ../modules/desktop.nix
-
-        { modules.desktop.xorg.enable = true; }
-
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = specialArgs;
-            users.${username} = {
-              imports = [
-                ../home
-                ../hosts/plendzion/home.nix
-                {
-                  alacritty.font-size = 9.25;
-                  modules.desktop.i3 = {
-                    enable = true;
-                    modifier = "Mod4";
-                    extraConfig = ''
-                      workspace $ws1 output DVI-D-0
-                      workspace $ws2 output HDMI-0
-                      workspace $ws3 output VGA-0
-                      workspace $ws4 output VGA-0
-
-                      exec --no-startup-id i3-msg "workspace $ws1; exec alacritty"
-                      exec --no-startup-id i3-msg "workspace $ws2; exec google-chrome-stable"
-                      exec --no-startup-id i3-msg "workspace $ws3; exec dbeaver"
-                      exec --no-startup-id i3-msg "workspace $ws4; exec mailspring --password-store='gnome-libsecret'"
-
-                      assign [class="Alacritty"] $ws1
-                      assign [class="Google-chrome"] $ws2
-                      assign [class="DBeaver"] $ws3
-                      assign [class="Mailspring"] $ws4
-                    '';
-                  };
-                }
-              ];
-            };
-          };
-        }
-      ];
-    };
+    plendzion = nixosSystem (import ../hosts/plendzion inputs);
   };
 }

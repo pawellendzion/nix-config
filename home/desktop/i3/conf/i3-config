@@ -173,6 +173,10 @@ exec --no-startup-id nm-applet
 # ================================
 
 font pango:FantasqueSansM Nerd Font Regular 8
+
 mouse_warping none
+
+focus_on_window_activation none
+no_focus [all]
 
 # vim:ft=i3config:ts=4:sw=4:noet

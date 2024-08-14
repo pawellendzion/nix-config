@@ -8,6 +8,10 @@ in
   ];
 
   programs = {
+    zoxide = {
+      enable = true;
+    };
+
     direnv = {
       enable = true;
       nix-direnv.enable = true;
@@ -61,5 +65,4 @@ in
       ];
     };
   };
-
 }

@@ -23,10 +23,14 @@ let
   };
 
   nixosSystem = mylib.nixosSystemWith { inherit inputs specialArgs system username; };
+
+  configs = (import ../hosts/plendzion (inputs // {
+    inherit nixosSystem;
+  })).nixosConfigurations;
 in
 {
   nixosConfigurations = {
     nixos-vbox = nixosSystem (import ../hosts/nixos-vbox inputs);
-    plendzion = nixosSystem (import ../hosts/plendzion inputs);
-  };
+    # plendzion = nixosSystem (import ../hosts/plendzion inputs);
+  } // configs;
 }

@@ -1,8 +1,8 @@
-{ ... }:
+{ nixosSystem, ... }:
 let
   hostName = "plendzion";
 
-  system-config = { config, ... }: {
+  system-config = { config, pkgs, ... }: {
     # Bootloader.
     boot.loader = {
       efi.canTouchEfiVariables = true;
@@ -31,9 +31,13 @@ let
       # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
     };
 
+    # boot.kernelModules = [ "nouveau" ];
+    # boot.blacklistedKernelModules = [ "nvidia" "nvidia_uvm" "nvidia_drm" "nvidia_modeset" ];
+
     services = {
       xserver.dpi = 96;
       xserver.videoDrivers = [ "nvidia" ];
+      # xserver.videoDrivers = [ "nouveau" ];
 
       # Enable touchpad support (enabled default in most desktopManager).
       # xserver.libinput.enable = true;
@@ -42,6 +46,10 @@ let
     hardware = {
       graphics.enable = true;
       graphics.enable32Bit = true;
+      # graphics.extraPackages = with pkgs; [
+      #   mesa
+      #   mesa.drivers
+      # ];
 
       nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
       nvidia.nvidiaSettings = true;
@@ -96,5 +104,65 @@ let
       }
     ] ++ base-modules.home;
   };
+
+  hyprland-module = {
+    nixos = [
+      {
+        services.displayManager.sddm.enable = true;
+        services.displayManager.sddm.wayland.enable = true;
+        programs.hyprland = {
+          enable = true;
+          xwayland.enable = true;
+        };
+      }
+    ] ++ base-modules.nixos;
+
+    home = [
+      {
+        alacritty.font-size = 9.25;
+        wayland.windowManager.hyprland = {
+          enable = true;
+          xwayland.enable = true;
+          systemd.enable = true;
+          settings = {
+            "$mod" = "SUPER";
+            bind =
+              [
+                "$mod, Q, exec, alacritty"
+                "$mod, F, exec, firefox"
+                ", Print, exec, grimblast copy area"
+              ];
+            # ++ (
+            #   # workspaces
+            #   # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
+            #   builtins.concatLists (builtins.genList
+            #     (
+            #       x:
+            #       let
+            #         ws =
+            #           let
+            #             c = (x + 1) / 10;
+            #           in
+            #           builtins.toString (x + 1 - (c * 10));
+            #       in
+            #       [
+            #         "$mod, ${ws}, workspace, ${toString (x + 1)}"
+            #         "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+            #       ]
+            #     )
+            #     10)
+            # );
+          };
+        };
+      }
+    ] ++ base-modules.home;
+  };
 in
-i3-module
+{
+  nixosConfigurations = {
+    "${hostName}-i3" = nixosSystem i3-module;
+    "${hostName}-hyprland" = nixosSystem hyprland-module;
+  };
+}
+# hyprland-module
+# i3-module
